@@ -1,0 +1,52 @@
+---
+import { Icon } from 'astro-icon';
+import Picture from '~/components/core/Picture.astro';
+---
+
+<section>
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="py-12 md:py-20">
+			<div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
+				<h1 class="text-5xl md:text-[3.50rem] font-bold leading-tighter tracking-tighter mb-4 font-heading">
+					World's Best
+					<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500">VRF Lottery</span>
+					Game
+				</h1>
+				<div class="max-w-3xl mx-auto">
+					<p class="text-xl text-gray-600 mb-8 dark:text-slate-400">
+						<br> Get lucky with the most secure and reliable blockchain-based lottery game! Leveraging the power of Polygon Network and Chainlink. Fast, secure, and reliable.
+
+			
+					</p>
+					<div class="max-w-none px-6 flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+						<div class="flex w-full sm:w-auto">
+							<a
+								class="btn text-white border border-primary-600 bg-primary-600 hover:bg-primary-800 hover:border-primary-800 sm:mb-0 w-full"
+								href="https://hnic-lottery.vercel.app/"
+								target="_blank"
+								rel="noopener"
+							>
+								<Icon name="tabler:rocket" class="w-5 h-5 mr-3 -ml-1.5" /> Get Started Now
+							</a>
+						</div>
+	
+					</div>
+				</div>
+			</div>
+			
+			<div>
+				<div class="relative mb-8 m-auto max-w-3xl">
+					<Picture
+						src={import('~/assets/images/hero1.png')}
+						class="mx-auto rounded-md shadow-lg bg-gray-400 dark:bg-slate-700 w-full"
+						widths={[2000, 2000]}
+						sizes="(max-width: 800px) 400px, 700px"
+						alt="Hero Image"
+						aspectRatio="16:9"
+						loading="loading"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

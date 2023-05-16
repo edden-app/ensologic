@@ -1,0 +1,161 @@
+<!-- ---
+import { Icon } from 'astro-icon';
+import { getHomePermalink } from '~/utils/permalinks';
+---
+
+<footer class="border-t border-gray-200 dark:border-slate-800">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+			<div class="col-span-12 lg:col-span-4">
+				<div class="mb-2">
+					<a class="inline-block font-bold text-xl" href={getHomePermalink()}>Mr. Market</a>
+				</div>
+				<div class="text-sm text-gray-600">
+					<a
+						class="text-gray-600 hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
+						href="https://drive.google.com/file/d/17AKt-_K8f0YgSCpocxH3_f7NPrLIlZcg/view">Privacy Policy</a
+					>
+				</div>
+		<div class="md:flex md:items-center md:justify-between py-6 md:py-8">
+			<ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0">
+				<li>
+					<a
+						class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+						aria-label="Twitter"
+						href="#"
+					>
+						<Icon name="tabler:brand-twitter" class="w-5 h-5" />
+					</a>
+				</li>
+				<li>
+					<a
+						class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+						aria-label="Instagram"
+						href="#"
+					>
+						<Icon name="tabler:brand-instagram" class="w-5 h-5" />
+					</a>
+				</li>
+				<li>
+					<a
+						class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+						aria-label="Facebook"
+						href="#"
+					>
+						<Icon name="tabler:brand-facebook" class="w-5 h-5" />
+					</a>
+				</li>
+				<li>
+					<a
+						class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+						aria-label="RSS"
+						href="/rss.xml"
+					>
+						<Icon name="tabler:rss" class="w-5 h-5" />
+					</a>
+				</li>
+				<li>
+					
+					</a>
+				</li>
+			</ul>
+			<div class="text-sm text-gray-700 mr-4 dark:text-slate-400">
+				<span
+					class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url(https://onwidget.com/favicon/favicon-32x32.png)]"
+				>
+				</span>
+				Made by <a class="text-blue-600 hover:underline dark:text-gray-200" href="https://onwidget.com/"> onWidget</a> ·
+				All rights reserved.
+			</div>
+	
+			</div>
+		</div>
+	</div>
+</footer> -->
+
+---
+import { Icon } from 'astro-icon';
+import { getHomePermalink } from '~/utils/permalinks';
+---
+
+<footer class="border-t border-gray-200 dark:border-slate-800">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+			<div class="col-span-12 lg:col-span-4">
+				<div class="mb-2">
+					<a class="inline-block font-bold text-xl" href={getHomePermalink()}>
+							Edden
+					</a>
+				</div>
+				<div class="text-sm text-gray-600">
+					
+					<a
+						class="text-gray-600 hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
+						href="" target="_blank">Get Started For Free</a
+					>
+				</div>
+				<div class="md:flex md:items-center md:justify-between py-6 md:py-8">
+					<ul class="flex md:order-1 md:mb-0">
+						<li>
+							<a
+								class="text-red-500  rounded-lg text-sm p-2.5 inline-flex items-center"
+								aria-label="Email"
+								href="mailto:"
+								target="_blank"
+							>
+								<Icon name="tabler:brand-gmail" class="w-8 w-8" />
+							</a>
+						</li>
+						
+						<li>
+							<a
+								class="text-blue-600 rounded-lg text-sm p-2.5 inline-flex items-center"
+								aria-label="LinkedIn"
+								href="https://www.linkedin.com/company/mrmarketapp/"
+								target="_blank"
+							>
+								<Icon name="tabler:brand-linkedin" class="w-8 h-8" />
+							</a>
+						</li>
+						<li>
+							<a
+								class="text-pink-500 rounded-lg text-sm p-2.5 inline-flex items-center"
+								aria-label="Instagram"
+								href="https://www.instagram.com/mrmarketapp/"
+								target="_blank"
+							>
+								<Icon name="tabler:brand-instagram" class="w-8 w-8" />
+							</a>
+						</li>
+						<li>
+							<a
+								class="text-green-500 rounded-lg text-sm p-2.5 inline-flex items-center"
+								aria-label="WhatsApp"
+								href="https://wa.me/48739405728?text=Wanting%20to%20know%20more%20about%20Mr%20Market%20App."
+								target="_blank"
+							>
+								<Icon name="tabler:brand-whatsapp" class="w-8 w-8" />
+							</a>
+						</li>
+						<li>
+							<a
+								class="text-blue-600 rounded-lg text-sm p-2.5 inline-flex items-center"
+								aria-label="Twitter"
+								href="https://twitter.com/"
+								target="_blank"
+							>
+								<Icon name="tabler:brand-twitter" class="w-8 w-8" />
+							</a>
+						</li>
+					
+						
+					</ul>
+					
+				</div>
+				<p>
+					Made with love by <a class="text-blue-600 hover:underline dark:text-gray-200" href="https://edden.app/" target="_blank"><u> Edden</u></a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>

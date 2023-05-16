@@ -1,0 +1,73 @@
+---
+import { Icon } from 'astro-icon';
+
+const items = [
+	[
+		{
+			title: 'Luck is in your Hands',
+			description:
+				"Enjoy an even playing field with H.N.I.C Lottery's innovative use of the VRF to make sure that every user has a fair chance of winning.",
+			icon: 'tabler:wand',
+		},
+		{
+			title: 'Blockchain based',
+			description:
+				'All transactions are secured using blockchain technology and every bet is stored immutably. We use Polygon and Chainlink.',
+			icon: 'tabler:currency-ethereum',
+		},
+		
+	],
+	[
+	{
+			title: 'Speed and Security',
+			description:
+				'Leverage the power of Polygon Network and Chainlink to make the game faster and more secure than ever before.',
+			icon: 'tabler:fingerprint',
+		},
+		{
+			title: 'Play from Anywhere',
+			description:
+				"Play your favorite game anywhere with H.N.I.C Lottery's anytime and anywhere with mobile responsive web app",
+			icon: 'tabler:access-point',
+		},
+	
+		
+		
+	],
+];
+---
+
+<section class="scroll-mt-16" id="features">
+	<div class="px-4 py-16 mb-10 mx-auto max-w-6xl lg:px-8 lg:py-20 bg-primary-50 dark:bg-slate-800">
+		<div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+			<p class="text-base text-primary-600 dark:text-primary-200 font-semibold tracking-wide uppercase">Amazing</p>
+			<h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+				Features of <span
+					class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500 whitespace-nowrap"
+					>H.N.I.C. Lottery</span
+				>
+			</h2>
+		</div>
+		<div class="grid mx-auto space-y-6 md:grid-cols-2 md:space-y-0">
+			{
+				items.map((subitems) => (
+					<div class="space-y-8 sm:px-8">
+						{subitems.map(({ title, description, icon }) => (
+							<div class="flex flex-row max-w-md">
+								<div class="mb-4 mr-4">
+									<div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-500">
+										{icon && <Icon name={icon} class="w-5 h-5 text-white" />}
+									</div>
+								</div>
+								<div>
+									<h3 class="mb-3 text-xl font-bold">{title}</h3>
+									<p>{description}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

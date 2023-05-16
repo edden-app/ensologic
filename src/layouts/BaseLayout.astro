@@ -1,0 +1,199 @@
+---
+import '~/assets/styles/base.css';
+
+import MetaTags from '~/components/core/MetaTags.astro';
+import BasicScripts from '~/components/core/BasicScripts.astro';
+
+const { meta = {} } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="motion-safe:scroll-smooth font-light 2xl:text-[20px]">
+	<head>
+		<MetaTags {...meta} />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+
+	<body class="antialiased text-gray-900 dark:text-slate-300 tracking-tight bg-white dark:bg-slate-900">
+		<slot />
+		<BasicScripts />
+		<style is:global>
+			img {
+				content-visibility: auto;
+			}
+
+			.float{
+					position:fixed;
+					width:60px;
+					height:60px;
+					bottom:40px;
+					right:40px;
+					background: #25D366;
+					color:#FFF;
+					border-radius:50px;
+					text-align:center;
+				font-size:30px;
+					box-shadow:20;
+				z-index:100;
+				}
+
+.my-float{
+	margin-top:16px;
+}
+			.my-div {
+				background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0)), url('https://firebasestorage.googleapis.com/v0/b/website-storage-account.appspot.com/o/ensologic%2Fimage%20123%20(2)%20(1).png?alt=media&token=45016acc-0502-4972-bde0-05c4cd839aa5');
+				background-repeat: no-repeat;
+				color: #ffffff;
+				width: 100vw;
+  				height: 90vh;
+				background-size: cover;
+ 				background-position: center;
+				padding: 10px;
+			}
+
+			.grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            height: 80vh;
+        }
+
+        .box1 {
+            grid-row: 1 / 3;
+            background-color: lightblue;
+        }
+
+        .box2 {
+            background-color: lightgreen;
+        }
+
+        .box3 {
+            background-color: lightcoral;
+        }
+
+		@media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 1fr);
+            }
+
+            .box1 {
+                grid-row: auto;
+            }
+        }
+		.textured-box {
+            background-image:linear-gradient(to bottom, rgb(6, 139, 221), rgba(255, 255, 255, 0)), url('https://firebasestorage.googleapis.com/v0/b/website-storage-account.appspot.com/o/ensologic%2Fclose-up-business-team-holding-their-thumbs-up%20(1).jpg?alt=media&token=1220a107-8fb8-471b-bc06-99b4b5dbe39f');
+            background-size: cover;
+			border-radius: 8px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin: 0 0 15px;
+			padding: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+			align-items: top;
+        }
+
+		.textured-box1 {
+           ; /* Replace with the path to your texture image */
+            background-size: cover;
+			background-image: linear-gradient(to bottom, #FFBF00, rgba(255, 255, 255, 0)), url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+			border-radius: 8px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin: 0 0 15px;
+			padding: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+			align-items: top;
+        }
+	
+		.textured-box2 {
+            background-image:  linear-gradient(to bottom, #ff5c74, rgba(255, 255, 255, 0)), url('https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80');
+            background-size: cover;
+			border-radius: 8px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin: 0 0 15px;
+			padding: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+			align-items: top;
+        }
+	
+		.stats-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number {
+  font-weight: bold;
+  animation: increase-number 2s ease-out;
+}
+
+.subheading {
+  font-size: 1.2rem;
+  color: rgb(94, 94, 94);
+  font-weight:500;
+}
+
+@keyframes increase-number {
+  from { 
+    transform: scale(1);
+  }
+  to { 
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    flex-direction: column; /* changed to stack items vertically */
+  }
+  
+  .stat {
+    margin-bottom: 2rem; /* added more space between rows */
+    flex-basis: 100%; /* changed to take full width of container */
+  }
+}
+		.wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6;
+        }
+
+        .image-container {
+            order: 2;
+        }
+
+        .text-container {
+            order: 1;
+        }
+
+        @media (min-width: 640px) {
+            .wrapper {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .image-container {
+                order: 1;
+            }
+
+            .text-container {
+                order: 2;
+            }
+        }
+   
+		</style>
+	</body>
+</html>

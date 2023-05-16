@@ -1,0 +1,855 @@
+---
+import { SITE } from '~/config.mjs';
+import { getCanonical, getHomePermalink } from '~/utils/permalinks';
+import Layout from '~/layouts/PageLayout.astro';
+
+import { Icon } from 'astro-icon';
+import Picture from '~/components/core/Picture.astro';
+
+import ToggleTheme from '~/components/core/ToggleTheme.astro';
+import ToggleMenu from '~/components/core/ToggleMenu.astro';
+
+import { db } from "../../lib/firebase";
+import { query, collection, getDocs, where,} from "firebase/firestore";
+
+//FIREBASE ADD THE DOCUMENT ID HERE 
+const q = query(collection(db, "users"), where("id", "==", "ensologiccommerce"),);
+
+const querySnapshot = await getDocs(q);
+const datas = querySnapshot.docs.map((querySnapshot) => ({ ...querySnapshot.data(), id: querySnapshot.id }));
+
+const meta = {
+	title: SITE.title,
+	description: SITE.description,
+	canonical: getCanonical(getHomePermalink()),
+};
+---
+
+
+<Layout {meta}>
+
+
+	<!-- HEADER SECTION  -->
+
+	<header id="header" class="sticky top-0 z-40 flex-none mx-auto w-full bg-white md:bg-white/90 dark:bg-slate-900 dark:md:bg-slate-900/90 md:backdrop-blur-sm border-b dark:border-b-0">
+		<div class="py-3 px-3 mx-auto w-full md:flex md:justify-between max-w-6xl md:px-10">
+			<div class="flex justify-between">
+				<a class="flex items-center" href={getHomePermalink()}>
+					<img src="https://firebasestorage.googleapis.com/v0/b/website-storage-account.appspot.com/o/ensologic%2Flogo-enso.png?alt=media&token=39e2b054-58ee-4a48-8ae3-0a015023d488" alt="Company Logo" width="60" height="60" class="rounded-md"> 
+				
+
+				{datas.map((data: any) => 
+					<span class="self-center ml-2  text-xl md:text-2xl font-extrabold text-gray-900 whitespace-nowrap dark:text-white">
+					{data.name}
+					</span>
+				)}
+				
+				</a>
+				<div class="flex items-center md:hidden">
+					<!-- <ToggleTheme /> -->
+					<ToggleMenu />
+				</div>
+			</div>
+			<nav
+				class="items-center w-full md:w-auto hidden md:flex text-gray-600 dark:text-slate-200 h-screen md:h-auto"
+				aria-label="Main navigation"
+			>
+				<ul class="flex flex-col pt-8 md:pt-0 md:flex-row md:self-center w-full md:w-auto text-xl md:text-base">
+					
+					<!-- <li class="md:hidden">
+						<a
+							class="font-medium hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
+							href="https://www.linkedin.com/"
+							target="_blank"
+							>Follow on Linkedin 
+						</a>
+					</li> -->
+					<li>
+						{datas.map((data: any) => 
+						<a
+							class="font-medium hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
+							href= {data.ctalink}
+							target="_blank"
+							>{data.ctabutton}
+						</a>
+						)}
+					</li>
+				</ul>
+				<div class="md:self-center flex items-center mb-4 md:mb-0 ml-2">
+					<div class="hidden items-center md:flex">
+						<!-- <a
+							href="https://www.linkedin.com/company/mrmarketapp/"
+							target="_blank"
+							class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+							aria-label="linkedin"
+						>
+							<Icon name="tabler:brand-linkedin" class="w-6 h-6" />
+						</a> -->
+						
+						<!-- <ToggleTheme iconClass="w-6 h-6" /> -->
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<a href="https://wa.me/918447752090?text=I%20checked%20out%20your%20website%20and%20wanted%20to%20know%20more" class="float" target="_blank">
+	<i class="fa fa-whatsapp my-float flash"></i>
+	</a>
+
+
+
+
+
+	<!-- HERO SECTION  -->
+	<section id="hero_section" class='my-div'>
+		
+		<div class="max-w-6xl mx-auto px-4 sm:px-6">
+			<div class="py-12 md:py-32">
+				<div class="text-left pb-10 md:pb-16 max-w-5xl mx-auto">
+					{datas.map((data: any) => 
+					<h1 class="text-3xl max-w-2xl md:text-[3.00rem] text-black tracking-tighter mb-4 font-bold" style="line-height: 3rem">
+						
+						
+						{data.heading}
+							<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500">	
+								Ensologic Commerce
+							</span>
+						
+					</h1>
+					)}
+					<div class="text-left mx-auto">
+						{datas.map((data: any) => 
+						<p class="text-xl max-w-2xl font-medium text-gray-800 mb-8 dark:text-white">
+							 {data.subheading}
+						</p>
+						)}
+					
+					
+						<div class="max-w-none flex flex-nowrap flex-col sm:flex-row sm:justify-left gap-4">
+							<div class="flex w-full sm:w-auto">
+								{datas.map((data: any) => 
+								<a
+									class="btn text-white border border-primary-600 bg-primary-700 hover:bg-primary-800 hover:border-primary-800 sm:mb-0 w-full rounded-md"
+									href= {data.ctalink}
+									target="_blank"
+									rel="noopener"
+								>
+									<Icon name="tabler:rocket" class="w-5 h-5 mr-3 -ml-1.5" />{data.ctabutton}
+								</a>
+								)}
+							</div>
+		
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+	</section>
+
+
+
+	<section id="services" class="relative">
+		<div  class="max-w-[65rem] px-4 sm:px-6 py-6 lg:px-8 lg:py-2  mx-auto border-b mt-5">
+		  <!-- Title -->
+		  <h2 class="text-2xl mx-auto text-center font-bold md:text-2xl md:leading-tight dark:text-white">Our Clients
+		  </h2>
+		  <!-- End Title -->
+		
+		  <!-- Grid -->
+		  <div class=" grid sm:grid-cols-2 lg:grid-cols-2 md:gap-6 lg:items-center">
+			<!-- Card -->
+			
+			<div class="flex flex-col text-center rounded-xl p-8 ">
+				
+				<img src="https://firebasestorage.googleapis.com/v0/b/website-storage-account.appspot.com/o/ensologic%2FGroup%2068.png?alt=media&token=4930a3ac-356d-4d78-92ba-7efa24f838bb">
+				
+			</div>
+		
+		
+			<!-- End Card -->
+		
+			<!-- Card -->
+			
+			<div class="flex flex-col text-center rounded-xl p-8 mb-2 ">
+				<img src='https://firebasestorage.googleapis.com/v0/b/website-storage-account.appspot.com/o/ensologic%2FGroup%2069.png?alt=media&token=62fda96e-81e3-479b-927b-d8a563c10633'>
+			
+			
+			  
+			</div>
+		
+			<!-- End Card -->
+		
+
+			
+
+			</div>
+		  <!-- End Grid -->
+		</div>
+		
+
+	<!-- End Usecases -->
+	</section>
+
+
+
+	<section id="benefits" class="relative">
+		<div  class="max-w-[70rem] px-4 sm:px-6 lg:px-8 lg:py-12 lg:pb-16 mx-auto">
+	<div class="grid-container row-gap-6 gap-3">
+        <div class="box1 textured-box shadow-lg">
+			<span class='text-xl md:text-3xl text-white font-bold md:mt-5'>Assured Quality. Everytime.</span> 
+
+		</div>
+        <div class="box2  textured-box1 shadow-lg">
+			<span class='text-xl md:text-3xl text-white font-bold md:mt-5'>Flexible Payment Terms.</span> 
+
+
+		</div>
+        <div class="box3  textured-box2 shadow-lg">
+			<span class='text-xl md:text-3xl text-white font-bold md:mt-5'>One-Stop Service till your doorstep.
+			</span> 
+
+		</div>
+    </div>
+		</div>
+		</section>
+
+
+<!-- <section>
+		<div class="max-w-3xl mx-auto text-center mb-10 lg:mb-5">
+			<h2 class="text-4xl font-bold md:text-4xl md:leading-tight text-primary-800">Everything you need for the best import experience <span
+				
+			</h2>
+		  </div>
+
+		<div class="owl-two owl-carousel owl-theme max-w-6xl mx-auto">
+			
+			<div class="item">
+				<div class="flex flex-col shadow-lg text-center items-center rounded-xl p-4 border-2 border-primary-500">
+					<Icon name="tabler:rocket" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Problem Solving
+				  </span>
+				 
+				</div>
+			
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:message-circle-2" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Effective Communication
+				  </span>
+				  
+			</div>
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:affiliate" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Decision making
+				  </span>
+				 
+	
+			</div>
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:stairs" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Growth Mindset
+				  </span>
+				  
+			</div>
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:mood-smile" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Emotional Intelligence
+				  </span>
+				  
+			</div>
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:social" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Social Intelligence
+				  </span>
+				 
+			</div>
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:bolt" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Grit and Determination
+				  </span>
+				  
+			</div>
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:brush" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Creativity
+				  </span>
+				 
+			</div>
+			</div>
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:clock" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Focus and Deep Work
+				  </span>
+				
+			</div>
+			</div>
+			
+			<div class="item">
+				<div class="flex flex-col text-center items-center rounded-xl p-5 border-2 border-primary-500">
+					<Icon name="tabler:users" class="mb-3 h-8 w-8 text-primary-700" /> 
+					<span class="font-bold text-xl text-primary-800 dark:text-gray-200">
+						Leadership
+				  </span>
+				  
+			</div>
+			</div>
+		</div>
+	</section> -->
+<section class="my-10">
+	<div class="max-w-xl mx-auto lg:max-w-2xl">
+		<div class="max-w-xl mb-5 md:mx-auto text-center lg:max-w-2xl">
+			<h2 class="max-w-lg text-4xl font-bold leading-none tracking-tight sm:text-5xl mx-auto font-heading">
+				Our Services
+			</h2>
+		</div>
+	</div>
+	<div  class="max-w-[70rem] px-4 sm:px-6 lg:px-8 lg:py-14 lg:pb-24 mx-auto">
+		<div class="mt-8 md:mt-3 grid sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:items-center wrapper">
+			
+				<div class="relative sm:mt-2 md:mx-6 max-w-4xl">
+				<p class="text-base text-primary-600 dark:text-primary-200 font-semibold tracking-wide uppercase">For Enterprises</p>
+				<h1 class="text-4xl md:text-3xl font-bold mb-4 ">
+					Source Goods Internationally with Ease.
+						
+				
+				</h1>
+
+				<p class="text-md md:text-lg mt-3 font-medium text-gray-700 mb-4 dark:text-white">
+					With Ensologic, International B2B purchase become as simple as sourcing the goods from a local supplier. With Our network of elaborate suppliers, find the best-suited supplier for yourself merely at the click of a button.
+				</p>
+				<ul class="mt-3 space-y-2.5 text-lg font-medium">
+					<li class="flex space-x-2">
+					  <svg
+						class="flex-shrink-0 h-7 w-7 text-blue-600"
+						width="16"
+						height="16"
+						viewBox="0 0 16 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					  >
+						<path
+						  d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z"
+						  fill="currentColor"></path>
+					  </svg>
+					  <span class="text-gray-800 dark:text-gray-400"> Sampling</span>
+					</li>
+
+					<li class="flex space-x-2">
+						<svg
+						  class="flex-shrink-0 h-7 w-7 text-blue-600"
+						  width="16"
+						  height="16"
+						  viewBox="0 0 16 16"
+						  fill="none"
+						  xmlns="http://www.w3.org/2000/svg"
+						>
+						  <path
+							d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z"
+							fill="currentColor"></path>
+						</svg>
+						<span class="text-gray-800 dark:text-gray-400">Customisation</span>
+					  </li>
+
+					  <li class="flex space-x-2">
+						<svg
+						  class="flex-shrink-0 h-7 w-7 text-blue-600"
+						  width="16"
+						  height="16"
+						  viewBox="0 0 16 16"
+						  fill="none"
+						  xmlns="http://www.w3.org/2000/svg"
+						>
+						  <path
+							d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z"
+							fill="currentColor"></path>
+						</svg>
+						<span class="text-gray-800 dark:text-gray-400"> Custom Clearances</span>
+					  </li>
+
+					  <li class="flex space-x-2">
+						<svg
+						  class="flex-shrink-0 h-7 w-7 text-blue-600"
+						  width="16"
+						  height="16"
+						  viewBox="0 0 16 16"
+						  fill="none"
+						  xmlns="http://www.w3.org/2000/svg"
+						>
+						  <path
+							d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z"
+							fill="currentColor"></path>
+						</svg>
+						<span class="text-gray-800 dark:text-gray-400"> Logistics</span>
+					  </li>
+
+					  <li class="flex space-x-2">
+						<svg
+						  class="flex-shrink-0 h-7 w-7 text-blue-600"
+						  width="16"
+						  height="16"
+						  viewBox="0 0 16 16"
+						  fill="none"
+						  xmlns="http://www.w3.org/2000/svg"
+						>
+						  <path
+							d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z"
+							fill="currentColor"></path>
+						</svg>
+						<span class="text-gray-800 dark:text-gray-400"> First-mile delivery</span>
+					  </li>
+
+					  <li class="flex space-x-2">
+						<svg
+						  class="flex-shrink-0 h-7 w-7 text-blue-600"
+						  width="16"
+						  height="16"
+						  viewBox="0 0 16 16"
+						  fill="none"
+						  xmlns="http://www.w3.org/2000/svg"
+						>
+						  <path
+							d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z"
+							fill="currentColor"></path>
+						</svg>
+						<span class="text-gray-800 dark:text-gray-400"> Last-mile delivery</span>
+					  </li>
+			
+					
+				  </ul>
+			
+			
+				
+					
+				
+				
+				
+
+				
+				</div>
+				<div class="relative  md:mx-6 max-w-full">
+				
+					
+				
+				<img src= "https://images.unsplash.com/photo-1545328805-926d6a0950ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"  class="mx-auto rounded-md"  style="object-fit: contain;" alt="Hero Image">
+				
+
+	
+				
+				</div>
+				
+				</div>
+		</div>
+	</section>
+<section class='bg-primary-50'>
+		<div class="max-w-[70rem] px-4 sm:px-6 lg:px-8 lg:py-14 lg:pb-24 mx-auto">
+			<div class="mt-5 md:mt-8 grid sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:items-center wrapper">
+				<div class="image-container flex flex-col text-start rounded-xl">
+					<img src="https://firebasestorage.googleapis.com/v0/b/website-storage-account.appspot.com/o/ensologic%2FScreenshot_2023-04-22-17-26-09-584_in.zaadu%201_oneplus-oneplus8pro-portrait.png?alt=media&token=35495caf-a061-4a45-ab0d-7c53ade61b5c" class="mx-auto rounded-md" style="object-fit: contain; height: 600px;" alt="Hero Image">
+				</div>
+				<div class="text-container relative sm:mt-4 md:mx-6 max-w-4xl">
+					<p class="text-base text-primary-600 dark:text-primary-200 font-semibold tracking-wide uppercase">B2B MarketPlace</p>
+					<h1 class="text-4xl md:text-3xl font-bold mb-4">
+						BEYOBO: Retailer App
+					</h1>
+					<p class="text-md md:text-lg mt-3 font-medium text-gray-700 mb-8 dark:text-white">
+						BEYOBO app provides high-quality products in categories such as Cosmetics, Mobile Accessories, Fashion Accessories, Home & Kitchen, etc.Retailers can share catalogs through social media to their prospective clients. After receiving the confirmation, they can place order on Beyobo. They get variety of products which increases their profitability and help them in increasing their customer footfall.
+					</p>
+
+					<div class="flex w-full sm:w-auto">
+				
+						<a
+
+							href= "https://play.google.com/store/apps/details?id=in.zaadu.twa&hl=en_IN&gl=US"
+							target="_blank"
+							rel="noopener"
+						>
+						<img src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+						alt="Google Play Link" style="max-width: 13rem;" class="rounded-md inline-flex">	
+						</a>
+			
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+<section class='my-10'>
+
+	<div  class="max-w-[70rem] px-4 sm:px-6 lg:px-8 lg:py-14 lg:pb-24 mx-auto">
+		<div class="mt-8 md:mt-3 grid sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:items-center wrapper">
+			
+				<div class="relative sm:mt-2 md:mx-6 max-w-4xl">
+				<p class="text-base text-primary-600 dark:text-primary-200 font-semibold tracking-wide uppercase">E-Commerce Sellers</p>
+				<h1 class="text-4xl md:text-3xl font-bold mb-4 ">
+				Buy Directly from Abroad
+						
+				
+				</h1>
+
+				<p class="text-md md:text-lg mt-3 font-medium text-gray-700 mb-4 dark:text-white">
+					Online Sellers can source the material directly from foreign land with the help of Ensologic. Ensologic helps in customisation, sampling, price negotiation and all logistics related solutions. By improving sourcing online sellers can increase their profitability and enhance their visibility on ecommerce players like Flipkart and Amazon. 
+				</p>
+				
+				
+				</div>
+				<div class="relative  md:mx-6 max-w-full">
+				
+					
+				
+				<img src= "https://images.unsplash.com/photo-1586880244406-556ebe35f282?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"  class="mx-auto rounded-md"  style="object-fit: contain;" alt="Hero Image">
+				
+
+	
+				
+				</div>
+				
+				</div>
+		</div>
+	</section>
+
+	<div class="px-4 py-8 md:py-8 sm:px-6 mx-auto md:px-24 lg:px-8 lg:py-8 max-w-6xl">
+	<div class="stats-grid max-w-6xl mx-auto">
+		<div class="stat">
+		  <div class="number text-4xl font-bold lg:text-5xl xl:text-5xl text-primary-500 font-heading">12200000</div>
+		  <div class="subheading">Units Delivered</div>
+		</div>
+		<div class="stat">
+		  <div class="number text-4xl font-bold lg:text-5xl xl:text-5xl text-primary-500 font-heading">80000</div>
+		  <div class="subheading">Downloads</div>
+		</div>
+		<div class="stat">
+		  <div class="number  text-4xl font-bold lg:text-5xl xl:text-5xl text-primary-500 font-heading">35000+</div>
+		  <div class="subheading">Registered Retailers</div>
+		</div>
+	  </div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- FAQ SECTION -->
+	<section id="faq" class="md:mt-10">
+		<div class="px-4 py-16 mx-auto max-w-6xl lg:py-6">
+			<div class="max-w-xl sm:mx-auto lg:max-w-2xl">
+				<div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+					<h2 class="max-w-xl mb-4 text-3xl font-bold leading-none tracking-tight sm:text-4xl md:mx-auto font-heading">
+						Got questions? We have answers for you.
+					</h2>
+				</div>
+			</div>
+			<div class="max-w-screen-xl sm:mx-auto">
+				<div class="grid grid-cols-1 gap-x-8 gap-y-8 lg:gap-x-16 md:grid-cols-2">
+					
+					<!-- FAQ 1 -->
+					<div class="space-y-8">
+						<div>
+
+							{datas.map((data: any) => 
+							<p class="mb-4 text-xl font-bold">
+								<Icon name="tabler:arrow-down-right" class="w-7 h-7 text-primary-500 inline-block icon-bold" />
+								 {data.q1}
+							</p>
+							<p class="text-gray-700 dark:text-gray-400 mb-2">
+								{data.a1}
+							</p>
+							)}
+
+						</div>
+					</div>
+
+					<!-- FAQ 2 -->
+					<div class="space-y-8">
+						<div>
+							{datas.map((data: any) => 
+							<p class="mb-4 text-xl font-bold">
+								<Icon name="tabler:arrow-down-right" class="w-7 h-7 text-primary-500 inline-block icon-bold" />
+								 {data.q2}
+							</p>
+							<p class="text-gray-700 dark:text-gray-400 mb-2">
+								{data.a2}
+							</p>
+							)}
+						</div>
+					</div>
+
+					<!-- FAQ 3 -->
+					<div class="space-y-8">
+						<div>
+							{datas.map((data: any) => 
+								<p class="mb-4 text-xl font-bold">
+									<Icon name="tabler:arrow-down-right" class="w-7 h-7 text-primary-500 inline-block icon-bold" />
+									 {data.q3}
+								</p>
+								<p class="text-gray-700 dark:text-gray-400 mb-2">
+									{data.a3}
+								</p>
+							)}
+						</div>
+					</div>
+
+					<!-- FAQ 4 -->
+					<div class="space-y-8">
+						<div>
+							{datas.map((data: any) => 
+								<p class="mb-4 text-xl font-bold">
+									<Icon name="tabler:arrow-down-right" class="w-7 h-7 text-primary-500 inline-block icon-bold" />
+									 {data.q4}
+								</p>
+								<p class="text-gray-700 dark:text-gray-400 mb-2">
+									{data.a4}
+								</p>
+							)}
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- CTA SECTION -->
+	<section id="cta" class="relative">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6 ">
+			<div class="py-4 md:py-10 mb-10">
+				<div class="max-w-3xl mx-auto text-center p-6 rounded-md shadow-xl bg-primary-600">
+					<h2 class="text-4xl text-slate-100 dark:text-slate-200 md:text-4xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+						{datas.map((data: any) => <span> {data.cta} </span> )}
+					</h2>
+					<p class="text-xl text-slate-200 dark:text-slate-300">
+						
+					</p>
+
+					<div class="mt-6">
+						{datas.map((data: any) => 
+						<a
+							class="btn bg-white text-primary-600 hover:bg-primary-800 mb-4 sm:mb-0"
+							href= {data.ctalink}
+							target="_blank"
+							rel="noopener"
+						>
+							<Icon name="tabler:rocket" class="w-6 h-6 mr-2 -ml-1.5" /> {data.ctabutton}
+						</a>
+						)}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+	<!-- FOOTERS SECTION -->
+	<footer class="border-t border-gray-200 dark:border-slate-800">
+		<div class="max-w-6xl mx-auto px-4 sm:px-6">
+			<div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+				<div class="col-span-12 lg:col-span-4">
+					{datas.map((data: any) => 
+					<div class="mb-2">
+					
+						<a class="inline-block font-bold text-xl" href={getHomePermalink()}>
+							{data.name}
+						</a>
+				
+					</div>
+					<div class="text-sm text-gray-600">
+								
+						<a class="text-gray-600 hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out" href= {data.ctalink} target="_blank"> 
+							Address:  #470, DLF Phase-V Sector-19, Gurugram, Haryana-122022
+							</a>
+				
+					</div>
+					)}
+					{datas.map((data: any) => 
+					<div class="md:flex md:items-center md:justify-between py-6 md:py-8">
+						<ul class="flex md:order-1 md:mb-0">
+							
+							
+							<li>
+								<a
+									class="text-blue-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+									aria-label="LinkedIn"
+									href="https://www.linkedin.com/company/beyobo/"
+									target="_blank"
+								>
+									<Icon name="tabler:brand-linkedin" class="w-8 h-8" />
+								</a>
+							</li>
+						
+						
+							<li>
+								<a
+									class="text-green-500 rounded-lg text-sm p-2.5 inline-flex items-center"
+									aria-label="WhatsApp"
+									href={data.whatsapp} 
+									target="_blank"
+								>
+									<Icon name="tabler:brand-whatsapp" class="w-8 h-8" />
+								</a>
+							</li>
+							
+							<li>
+								<a
+									class="text-red-400  rounded-lg text-sm p-2.5 inline-flex items-center"
+									aria-label="Email"
+									href="mailto:kunal@ensologic.com"
+									target="_blank"
+								>
+									<Icon name="tabler:brand-gmail" class="w-8 h-8" />
+								</a>
+							</li>
+							
+							<li>
+								<a
+									class="text-blue-500  rounded-lg text-sm p-2.5 inline-flex items-center"
+									aria-label="Facebook"
+									href="https://www.facebook.com/beyoboforretail/"
+									target="_blank"
+								>
+									<Icon name="tabler:brand-facebook" class="w-8 h-8" />
+								</a>
+							</li>
+							<li>
+								<a
+									class="text-pink-400  rounded-lg text-sm p-2.5 inline-flex items-center"
+									aria-label="Instagram"
+									href="https://www.instagram.com/beyoboforretail/"
+									target="_blank"
+								>
+									<Icon name="tabler:brand-instagram" class="w-8 h-8" />
+								</a>
+							</li>
+							<li>
+								<a
+									class="text-red-600  rounded-lg text-sm p-2.5 inline-flex items-center"
+									aria-label="Youtube"
+									href="https://www.youtube.com/channel/UCHxERRpqOWvbAa08OvyQIPA"
+									target="_blank"
+								>
+									<Icon name="tabler:brand-youtube" class="w-8 h-8" />
+								</a>
+							</li>
+							<li>
+								<a
+									class="text-sky-300  rounded-lg text-sm p-2.5 inline-flex items-center"
+									aria-label="Twitter"
+									href="https://twitter.com/Ensologic1"
+									target="_blank"
+								>
+									<Icon name="tabler:brand-twitter" class="w-8 h-8" />
+								</a>
+							</li>
+							
+							
+						</ul>
+						
+					</div>
+					)}
+					<p class='hidden'>
+						Made with love by <a class="text-blue-600 hover:underline font-bold dark:text-gray-200" href="https://edden.app/" target="_blank"><u> Edden</u></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script async src="https://tally.so/widgets/embed.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+	$('.owl-two').owlCarousel({
+		loop:true,
+		margin:20,
+		autoplay: true,
+		dots:false,
+		autoplayHoverPause:false,
+		slideTransition: 'linear',
+        autoplaySpeed: 6000,
+		autoplayTimeout: 3000,	
+		stagePadding:30,
+		responsive:{
+			0:{
+				items:1.5
+			},
+			600:{
+				items:4
+			},
+			1000:{
+				items:5
+			}
+		}
+	})
+	</script>
+	<script>const numbers = document.querySelectorAll('.number');
+
+		numbers.forEach(number => {
+		  const target = parseInt(number.textContent);
+		  const increment = Math.ceil(target / 100);
+		  let count = 0;
+		
+		  const updateNumber = () => {
+			count += increment;
+			if (count >= target) {
+			  clearInterval(interval);
+			  count = target;
+			}
+			number.textContent = count;
+		  };
+		
+		  const interval = setInterval(updateNumber, 20);
+		});</script>
+</Layout>
+

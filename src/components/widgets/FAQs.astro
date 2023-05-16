@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-icon';
+
+const items = [
+	[
+		{
+			question: 'What makes H.N.I.C Lottery different?',
+			answer: `H.N.I.C Lottery is powered by blockchain technology to ensure fairness, speed, and transparency. We use the Verifiable Random Function (VRF) of Chainlink to guarantee luck-based game play, making it the most reliable lottery game on the market.`,
+		},
+		{
+			question: 'How is H.N.I.C Lottery secure?',
+			answer: `H.N.I.C Lottery is built on Polygon Network and Chainlink. All gameplay is stored on the blockchain, securing your play from any tampering or fake winners. With Chainlink's VRF and Polygon's scalability, you can play with confidence knowing your play is secure.`,
+		},
+	],
+	[
+		{
+			question: 'What are the benefits to playing H.N.I.C Lottery?',
+			answer: `H.N.I.C Lottery offers a variety of features to provide a safe and fun gaming experience. Our lottery uses a unique VRF technology to make the game more luck-based and even for all players. Plus, all game play is secured by the blockchain, ensuring fairness and transparency.`,
+		},
+		{
+			question: "How fast is H.N.I.C Lottery? ",
+			answer: `H.N.I.C Lottery is one of the fastest lottery games available. By leveraging the power of Polygon Network and Chainlink, we are able to provide a lightning-fast gaming experience with no downtime or slowdowns. So you can play quickly and win big!`,
+		},
+		
+	],
+];
+---
+
+<div class="px-4 py-16 mx-auto max-w-6xl lg:py-6">
+	<div class="max-w-xl sm:mx-auto lg:max-w-2xl">
+		<div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+			<h2 class="max-w-lg mb-4 text-3xl font-bold leading-none tracking-tight sm:text-4xl md:mx-auto font-heading">
+				Frequently Asked Questions
+			</h2>
+		</div>
+	</div>
+	<div class="max-w-screen-xl sm:mx-auto">
+		<div class="grid grid-cols-1 gap-x-8 gap-y-8 lg:gap-x-16 md:grid-cols-2">
+			{
+				items.map((subitems) => (
+					<div class="space-y-8">
+						{subitems.map(({ question, answer }) => (
+							<div>
+								<p class="mb-4 text-xl font-bold">
+									<Icon name="tabler:arrow-down-right" class="w-7 h-7 text-primary-500 inline-block icon-bold" />
+									{question}
+								</p>
+								{answer.split('\n\n').map((paragraph) => (
+									<p class="text-gray-700 dark:text-gray-400 mb-2" set:html={paragraph} />
+								))}
+							</div>
+						))}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</div>
